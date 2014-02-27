@@ -1,12 +1,12 @@
-# ShippingEasy::Ruby
+# ShippingEasy
 
-TODO: Write a gem description
+Still in development. Please hold.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'shipping_easy-ruby'
+    gem 'shipping_easy'
 
 And then execute:
 
@@ -14,11 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install shipping_easy-ruby
-
-## Usage
-
-TODO: Write usage instructions here
+    $ gem install shipping_easy
 
 ## Contributing
 
