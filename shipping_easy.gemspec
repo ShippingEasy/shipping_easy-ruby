@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ShippingEasy::VERSION
   spec.authors       = ["ShippingEasy"]
   spec.email         = ["dev@shippingeasy.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "The official ShippingEasy API client for Ruby."
+  spec.summary       = "The official ShippingEasy API client for Ruby."
   spec.homepage      = ""
   spec.license       = "MIT"
 
