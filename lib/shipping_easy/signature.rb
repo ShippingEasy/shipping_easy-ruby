@@ -64,7 +64,8 @@ module ShippingEasy
     # Returns true if the supplied string or signature object matches the current object.
     def ==(other_signature)
       expected_signature, supplied_signature = self.to_s, other_signature.to_s
-      return false if expected_signature.blank? || supplied_signature.blank? || expected_signature.bytesize != supplied_signature.bytesize
+      return false if expected_signature.nil? || supplied_signature.nil? || expected_signature.empty? || supplied_signature.empty?
+      return false if expected_signature.bytesize != supplied_signature.bytesize
       l = expected_signature.unpack "C#{expected_signature.bytesize}"
       res = 0
       supplied_signature.each_byte { |byte| res |= byte ^ l.shift }
