@@ -3,7 +3,7 @@ require "spec_helper"
 describe ShippingEasy::Http::FaradayAdapter do
 
   let(:http_method) { "post" }
-  let(:parameters) { { "page" => 1 } }
+  let(:params) { { "page" => 1 } }
   let(:base_url) { "https://www.test.com" }
   let(:uri) { "/api/orders" }
   let(:body) { { order_number: "1234" }.to_json }
@@ -11,7 +11,7 @@ describe ShippingEasy::Http::FaradayAdapter do
   let(:request) do
     double("request",
             http_method: http_method,
-            parameters: parameters,
+            params: params,
             base_url: base_url,
             uri: uri,
             body: body)
@@ -19,7 +19,7 @@ describe ShippingEasy::Http::FaradayAdapter do
 
   subject { ShippingEasy::Http::FaradayAdapter.new(request) }
 
-  [:http_method, :parameters, :base_url, :uri, :body].each do |m|
+  [:http_method, :params, :base_url, :uri, :body].each do |m|
     it "delegates #{m} to request" do
       subject.send(m).should == request.send(m)
     end

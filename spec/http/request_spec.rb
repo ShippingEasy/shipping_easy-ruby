@@ -5,11 +5,11 @@ describe ShippingEasy::Http::Request do
   let(:http_method) { "post" }
   let(:params) { { "page" => 1 } }
   let(:base_url) { "https://www.test.com" }
-  let(:path) { "/api/orders" }
+  let(:relative_path) { "/orders" }
   let(:body) { { order_number: "1234" }.to_json }
   let(:api_key) { "12345678ASGHSGHJ" }
   let(:api_secret) { "12345678ASGHSGHJ123213321312" }
-  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: path, params: params.dup, body: body) }
+  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: "/api#{relative_path}", params: params.dup, body: body) }
 
   before do
     ShippingEasy.configure do |config|
@@ -18,9 +18,9 @@ describe ShippingEasy::Http::Request do
     end
   end
 
-  subject { ShippingEasy::Http::Request.new(http_method: http_method, params: params, path: path, body: body) }
+  subject { ShippingEasy::Http::Request.new(http_method: http_method, params: params, relative_path: relative_path, body: body) }
 
-  [:http_method, :params, :path, :body].each do |m|
+  [:http_method, :params, :relative_path, :body].each do |m|
     it "parses and sets the option named #{m}" do
       subject.send(m).should == send(m)
     end

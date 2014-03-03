@@ -2,7 +2,7 @@ class ShippingEasy::Http::FaradayAdapter
 
   extend Forwardable
 
-  def_delegators :request, :body, :parameters, :base_url, :http_method, :uri
+  def_delegators :request, :body, :params, :base_url, :http_method, :uri
 
   attr_reader :request
 
@@ -16,7 +16,7 @@ class ShippingEasy::Http::FaradayAdapter
 
   def post
     connection.post do |req|
-      req.url uri, parameters
+      req.url uri, params
       req.body = request.body
     end
   end

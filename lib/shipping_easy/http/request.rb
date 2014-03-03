@@ -1,12 +1,16 @@
 class ShippingEasy::Http::Request
 
-  attr_accessor :http_method, :body, :params, :path
+  attr_accessor :http_method, :body, :params, :relative_path
 
   def initialize(options = {})
     @http_method = options.fetch(:http_method, :get)
     @params = options.fetch(:params, {})
     @body = options.delete(:body)
-    @path = options.delete(:path)
+    @relative_path = options.delete(:relative_path)
+  end
+
+  def self.connect!(options = {})
+    new(options).connect!
   end
 
   def connect!
@@ -19,8 +23,12 @@ class ShippingEasy::Http::Request
     params[:api_timestamp] = Time.now.to_i
   end
 
+  def uri
+    "/api#{relative_path}"
+  end
+
   def signature
-    ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: path, params: params, body: body)
+    ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: uri, params: params, body: body)
   end
 
   def adapter
@@ -33,6 +41,10 @@ class ShippingEasy::Http::Request
 
   def api_key
     ShippingEasy.api_key
+  end
+
+  def base_url
+    ShippingEasy.base_url
   end
 
 end
