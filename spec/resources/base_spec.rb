@@ -20,7 +20,7 @@ describe ShippingEasy::Resources::Base do
         GenericResource.command(:create, method: :post) do |args|
           "/this/is/the/path"
         end
-        GenericResource.should_receive(:execute_request!).with({:path=>"/this/is/the/path", :http_method=>:get})
+        GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/path", :http_method=>:get})
         GenericResource.create
       end
 
@@ -29,7 +29,7 @@ describe ShippingEasy::Resources::Base do
           GenericResource.command(:create, method: :post) do |args|
             "/this/is/the/#{args.delete(:name)}"
           end
-          GenericResource.should_receive(:execute_request!).with({:path=>"/this/is/the/ABC123", :http_method=>:get})
+          GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/ABC123", :http_method=>:get})
           GenericResource.create(name: "ABC123")
         end
       end
