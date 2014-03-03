@@ -18,7 +18,7 @@ class ShippingEasy::Http::ResponseHandler
     case status
       when 401 then raise ShippingEasy::AccessDeniedError, response.body
       when 404 then raise ShippingEasy::ResourceNotFoundError, response.body
-      when 200 then JSON.parse(response.body)
+      when 200, 201 then JSON.parse(response.body)
       else
         raise ShippingEasy::Error, response.body
     end
