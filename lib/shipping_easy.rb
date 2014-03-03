@@ -1,10 +1,43 @@
-require 'rack'
+
+require "faraday"
+require "rack"
+require "json"
+require "shipping_easy/authenticator"
+require "shipping_easy/configuration"
+require "shipping_easy/signature"
+require "shipping_easy/http"
+require "shipping_easy/http/faraday_adapter"
+require "shipping_easy/http/request"
+require "shipping_easy/http/response_handler"
 require "shipping_easy/version"
 
 module ShippingEasy
 
-  class Error < StandardError; end
+  class << self
 
+    attr_accessor :configuration
+
+    def configure
+      configuration = ShippingEasy::Configuration.new
+      yield(configuration)
+      self.configuration = configuration
+    end
+
+    def api_secret
+      configuration.api_secret
+    end
+
+    def api_key
+      configuration.api_key
+    end
+
+    def end_point
+      configuration.end_point
+    end
+  end
+
+  class Error < StandardError; end
+  class ResourceNotFoundError < Error; end
   class RequestExpiredError < Error
     def initialize(msg = "The request has expired.")
       super(msg)
