@@ -9,6 +9,10 @@ require "shipping_easy/http"
 require "shipping_easy/http/faraday_adapter"
 require "shipping_easy/http/request"
 require "shipping_easy/http/response_handler"
+require "shipping_easy/resources"
+require "shipping_easy/resources/base"
+require "shipping_easy/resources/order"
+require "shipping_easy/resources/cancellation"
 require "shipping_easy/version"
 
 module ShippingEasy
@@ -31,8 +35,8 @@ module ShippingEasy
       configuration.api_key
     end
 
-    def end_point
-      configuration.end_point
+    def base_url
+      configuration.base_url
     end
   end
 

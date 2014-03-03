@@ -5,11 +5,11 @@ describe ShippingEasy::Configuration do
 
   specify { subject.should respond_to(:api_key) }
   specify { subject.should respond_to(:api_secret) }
-  specify { subject.should respond_to(:end_point) }
+  specify { subject.should respond_to(:base_url) }
 
   describe "http_adapter" do
     it "gets set to a default" do
-      subject.http_adapter.should == ShippingEasy::FaradayAdapter
+      subject.http_adapter.should == ShippingEasy::Http::FaradayAdapter
     end
 
     it "can be overidden" do
@@ -18,14 +18,14 @@ describe ShippingEasy::Configuration do
     end
   end
 
-  describe "end_point" do
+  describe "base_url" do
     it "gets set to a default" do
-      subject.http_adapter.should == ShippingEasy::FaradayAdapter
+      subject.base_url.should == "https://app.shippingeasy.com"
     end
 
     it "can be overidden" do
-      subject.http_adapter = String
-      subject.http_adapter.should == String
+      subject.base_url = String
+      subject.base_url.should == String
     end
   end
 end

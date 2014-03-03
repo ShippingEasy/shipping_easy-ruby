@@ -17,13 +17,13 @@ module ShippingEasy
     attr_accessor :api_key,
                   :api_secret,
                   :api_version,
-                  :end_point,
+                  :base_url,
                   :http_adapter
 
     # Creates a configuration object, setting the default attributes.
     def initialize
       @http_adapter = ShippingEasy::Http::FaradayAdapter
-      @end_point = "https://app.shippingeasy.com/api"
+      @base_url = "https://app.shippingeasy.com"
     end
   end
 end
