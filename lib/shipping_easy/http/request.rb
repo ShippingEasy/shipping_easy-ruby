@@ -19,8 +19,9 @@ class ShippingEasy::Http::Request
   end
 
   def sign_request!
-    params[:api_signature] = signature.to_s
+    params[:api_key] = api_key
     params[:api_timestamp] = Time.now.to_i
+    params[:api_signature] = signature.to_s
   end
 
   def uri
