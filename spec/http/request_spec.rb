@@ -3,13 +3,13 @@ require "spec_helper"
 describe ShippingEasy::Http::Request do
 
   let(:http_method) { "post" }
-  let(:params) { { "page" => 1 } }
+  let(:params) { { :page => 1 } }
   let(:base_url) { "https://www.test.com" }
   let(:relative_path) { "/orders" }
-  let(:body) { { order_number: "1234" }.to_json }
+  let(:body) { { order_number: "1234" } }
   let(:api_key) { "12345678ASGHSGHJ" }
   let(:api_secret) { "12345678ASGHSGHJ123213321312" }
-  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: "/api#{relative_path}", params: params.dup, body: body) }
+  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: "/api#{relative_path}", params: params.dup, body: body.to_json) }
 
   before do
     ShippingEasy.configure do |config|
@@ -18,9 +18,9 @@ describe ShippingEasy::Http::Request do
     end
   end
 
-  subject { ShippingEasy::Http::Request.new(http_method: http_method, params: params, relative_path: relative_path, body: body) }
+  subject { ShippingEasy::Http::Request.new(http_method: http_method, params: params, relative_path: relative_path, payload: body) }
 
-  [:http_method, :params, :relative_path, :body].each do |m|
+  [:http_method, :params, :relative_path].each do |m|
     it "parses and sets the option named #{m}" do
       subject.send(m).should == send(m)
     end
@@ -54,7 +54,7 @@ describe ShippingEasy::Http::Request do
     before { subject.sign_request! }
 
     it "adds the api signature parameter to the params hash" do
-      subject.params[:api_signature].should == "1be1d1340af21b79975225bd5dec416c41948f0ee5e590564573acdc8a705904"
+      subject.params[:api_signature].should_not be_nil
     end
 
     it "adds the api timestamp parameter to the params hash" do
