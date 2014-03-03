@@ -1,0 +1,2 @@
+module ShippingEasy::Resources
+end
