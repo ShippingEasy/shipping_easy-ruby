@@ -1,0 +1,2 @@
+module ShippingEasy::Http
+end
