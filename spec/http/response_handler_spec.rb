@@ -16,6 +16,10 @@ describe ShippingEasy::Http::ResponseHandler do
     context "when success" do
       specify { subject.run.should == body }
     end
+    context "when request is invalid" do
+      let(:status) { 400 }
+      specify { expect { subject.run }.to raise_error(ShippingEasy::InvalidRequestError) }
+    end
     context "when authentication fails" do
       let(:status) { 401 }
       specify { expect { subject.run }.to raise_error(ShippingEasy::AccessDeniedError) }

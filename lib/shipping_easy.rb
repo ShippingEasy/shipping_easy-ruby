@@ -42,6 +42,7 @@ module ShippingEasy
 
   class Error < StandardError; end
   class ResourceNotFoundError < Error; end
+  class InvalidRequestError < Error; end
   class RequestExpiredError < Error
     def initialize(msg = "The request has expired.")
       super(msg)
