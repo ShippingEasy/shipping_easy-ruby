@@ -13,6 +13,12 @@ describe ShippingEasy::Authenticator, api: true do
   let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: method, path: path, params: params, body: request_body) }
   subject { ShippingEasy::Authenticator.new(api_secret: api_secret, method: method, path: path, params: params_with_signature, body: request_body) }
 
+  before do
+    ShippingEasy.configure do |config|
+      config.api_secret = api_secret
+    end
+  end
+
   describe "#initialize" do
     specify { subject.api_secret.should == api_secret }
     specify { subject.method.should == :post }
@@ -21,6 +27,11 @@ describe ShippingEasy::Authenticator, api: true do
     specify { subject.params.should == params_with_signature }
     specify { subject.params[:api_signature].should be_nil }
     specify { subject.expected_signature.should be_a(ShippingEasy::Signature) }
+  end
+
+  context "when api_secret is not supplied" do
+    subject { ShippingEasy::Authenticator.new(api_secret: api_secret, method: method, path: path, params: params_with_signature, body: request_body) }
+    specify { subject.api_secret.should == api_secret }
   end
 
   describe "#request_expires_at" do

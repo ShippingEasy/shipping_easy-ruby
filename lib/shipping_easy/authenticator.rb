@@ -24,7 +24,7 @@ module ShippingEasy
     #           :params - The query params passed in as part of the request.
     #           :body - The body of the request which should normally be a JSON payload.
     def initialize(options = {})
-      @api_secret = options.fetch(:api_secret)
+      @api_secret = options.fetch(:api_secret, ShippingEasy.api_secret)
       @method = options.fetch(:method, :get)
       @path = options.fetch(:path)
       @body = options.fetch(:body, nil)
