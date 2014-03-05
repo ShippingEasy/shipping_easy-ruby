@@ -28,14 +28,17 @@ module ShippingEasy
     end
 
     def api_secret
+      return nil if configuration.nil?
       configuration.api_secret
     end
 
     def api_key
+      return nil if configuration.nil?
       configuration.api_key
     end
 
     def base_url
+      return nil if configuration.nil?
       configuration.base_url
     end
   end
