@@ -91,7 +91,7 @@ The following is a list of attributes that should be provided to the ShippingEas
 
 An example hash for the create order API call may be found here: https://gist.github.com/twmills/9349053.
 
-**ext_order_identifier**
+**external_order_identifier**
 : *Required.* The e-commerce system's order ID.
 
 **ordered_at**
