@@ -21,6 +21,13 @@ class ShippingEasy::Http::FaradayAdapter
     end
   end
 
+  def get
+    connection.get do |req|
+      req.url uri, params
+      req.body = request.body
+    end
+  end
+
   def connection
     @connection ||= Faraday.new(url: base_url) do |faraday|
       faraday.adapter Faraday.default_adapter
