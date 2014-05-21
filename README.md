@@ -2,12 +2,16 @@
 
 # ShippingEasy
 
-This is the official wrapper for the ShippingEasy API. Currently the API only exposes several functions so this wrapper only handles the following calls:
+This is the official wrapper for the ShippingEasy API. 
 
-* Adding an order to a ShippingEasy store
-* Cancelling an order before it has been shipped
+The ShippingEasy API supports the following features:
 
-We will keep this library up to date as we expand our API offerings.
+* Secure, authenticated intake of orders for shipment
+* Cancellation of orders that no longer need to be shipped
+* A callback facility that provides shipment information (carrier, cost, tracking number, etc.) for an order
+* Query capabilities to read order data from ShippingEasy
+
+We will keep this library up to date as we expand the ShippingEasy API.
 
 ## Setup
 
