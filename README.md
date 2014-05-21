@@ -66,7 +66,7 @@ The arguments for the constructor are as follows:
 
 ### Finding an order
 
-To retrieve a specific order, call the find method on the Order resource class with a ShippingEasy order ID specified.
+To retrieve a specific order, call the find method on the Order resource class.
 
     ShippingEasy::Resources::Order.find(id: 876)
 
