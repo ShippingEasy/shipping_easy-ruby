@@ -408,6 +408,37 @@ The cancellation could not complete for one or more of the following reasons:
 
 The exception will contain a message that indicates which of these conditions failed.
 
+## Making requests via curl
+Here are the steps to sign a request and send it via curl:
+
+First you will need to create an API signature:
+
+Concatenate these into a plaintext string using the following order:
+
+1. Capitilized method of the request. E.g. "POST"
+2. The URI path
+3. The query parameters sorted alphabetically and concatenated together into a URL friendly format: param1=ABC&param2=XYZ
+4. The request body as a string if one exists
+
+All parts are then concatenated together with an ampersand. The result resembles something like this:
+
+    "POST&/api/orders&param1=ABC&param2=XYZ&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}"
+
+Finally, using your API secret encrypt the string using HMAC sha256. In ruby, it looks like this:
+
+    OpenSSL::HMAC::hexdigest("sha256", api_secret, "POST&/api/orders&param1=ABC&param2=XYZ&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}")
+
+### Example curl request
+
+````shell
+curl -H "Content-Type: application/json" --data @body.json "https://app.shippingeasy.com/api/stores/27aa472e16faa83dd13b7758d31974ed/orders?api_key=f9a7c8ebdfd34beaf260d9b0296c7059&api_timestamp=1401803554&api_signature=c65f43beed46e581939898a78acd10064cfa146845e97885ec02124d7ad648e4"
+````
+
+An example body.json can be found here:
+
+https://gist.github.com/twmills/3f4636b835c611ab3f7f
+
+
 ## Contributing
 
 1. Fork it
