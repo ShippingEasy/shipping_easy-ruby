@@ -409,11 +409,7 @@ The cancellation could not complete for one or more of the following reasons:
 The exception will contain a message that indicates which of these conditions failed.
 
 ## Making requests via curl
-Here are the steps to sign a request and send it via curl:
-
-First you will need to create an API signature:
-
-Concatenate these into a plaintext string using the following order:
+First you will need to create an API signature. Concatenate these into a plaintext string using the following order:
 
 1. Capitilized method of the request. E.g. "POST"
 2. The URI path
@@ -422,11 +418,14 @@ Concatenate these into a plaintext string using the following order:
 
 All parts are then concatenated together with an ampersand. The result resembles something like this:
 
-    "POST&/api/orders&param1=ABC&param2=XYZ&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}"
+    "POST&/api/orders&api_key=f9a7c8ebdfd34beaf260d9b0296c7059&api_timestamp=1401803554&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}"
 
 Finally, using your API secret encrypt the string using HMAC sha256. In ruby, it looks like this:
 
-    OpenSSL::HMAC::hexdigest("sha256", api_secret, "POST&/api/orders&param1=ABC&param2=XYZ&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}")
+    OpenSSL::HMAC::hexdigest("sha256", api_secret, "POST&/api/orders&api_key=f9a7c8ebdfd34beaf260d9b0296c7059&api_timestamp=1401803554&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}")
+
+### API timestamp
+You must include an API timestamp in your requests. The timestamp should be an integer representation of the current time.
 
 ### Example curl request
 
