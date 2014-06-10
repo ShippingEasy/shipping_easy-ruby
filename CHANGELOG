@@ -1,2 +1,5 @@
+v0.3.1
+- Class-level options were being deleted rather than fetched, so subsequent calls were not working.
+
 v0.3.0
 - Added find and find_all methods to Order.
