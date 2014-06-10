@@ -133,7 +133,7 @@ https://gist.github.com/twmills/005b3c4ab9c85330a801
 Your credentials could not be authenticated or the store api_key could not be found.
 
 ##### ShippingEasy::InvalidRequestError
-The order could not be created on the server for one or more of the following reasons:
+The orders could not retrieved for one or more of the following reasons:
 
 * The API timestamp could not be parsed.
 
