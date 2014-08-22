@@ -425,7 +425,7 @@ Finally, using your API secret encrypt the string using HMAC sha256. In ruby, it
     OpenSSL::HMAC::hexdigest("sha256", api_secret, "POST&/api/orders&api_key=f9a7c8ebdfd34beaf260d9b0296c7059&api_timestamp=1401803554&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}")
 
 ### API timestamp
-You must include an API timestamp in your requests. The timestamp should be an integer representation of the current time.
+You must include an API timestamp in your requests. The timestamp should be a Unix epoch timestamp (integer) of the current time.
 
 ### Example curl request
 
