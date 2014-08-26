@@ -37,6 +37,16 @@ module ShippingEasy
       configuration.api_key
     end
 
+    def partner_api_secret
+      return nil if configuration.nil?
+      configuration.partner_api_secret
+    end
+
+    def partner_api_key
+      return nil if configuration.nil?
+      configuration.partner_api_key
+    end
+
     def base_url
       return nil if configuration.nil?
       configuration.base_url
