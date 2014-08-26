@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/repos/5315eeefe30ba01aa501c119/badges/92e9ca8e93ca2cbc260b/gpa.png)](https://codeclimate.com/repos/5315eeefe30ba01aa501c119/feed)
+[![Code Climate](https://codeclimate.com/github/ShippingEasy/shipping_easy-ruby/badges/gpa.svg)](https://codeclimate.com/github/ShippingEasy/shipping_easy-ruby)
 
 # ShippingEasy
 
