@@ -33,8 +33,8 @@ describe ShippingEasy::Signature do
 
   describe "#==" do
     let(:duplicate_signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: method, path: path, params: params, body: request_body) }
-    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext)).to be_true }
-    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", "BADSECRET", subject.plaintext)).to be_false }
-    specify { expect(subject == duplicate_signature).to be_true }
+    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext)).to be_truthy }
+    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", "BADSECRET", subject.plaintext)).to be_falsey }
+    specify { expect(subject == duplicate_signature).to be_truthy }
   end
 end
