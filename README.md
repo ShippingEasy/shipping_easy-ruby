@@ -1,5 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/ShippingEasy/shipping_easy-ruby/badges/gpa.svg)](https://codeclimate.com/github/ShippingEasy/shipping_easy-ruby)
-
+[![Build Status](https://travis-ci.org/ShippingEasy/shipping_easy-ruby.svg?branch=master)](https://travis-ci.org/ShippingEasy/shipping_easy-ruby)
 # ShippingEasy
 
 This is the official wrapper for the ShippingEasy API. 
