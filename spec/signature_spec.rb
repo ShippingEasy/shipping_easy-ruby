@@ -20,21 +20,21 @@ describe ShippingEasy::Signature do
   end
 
   describe "#plaintext" do
-    specify { subject.plaintext.should == "POST&/api/orders&api_key=123&test_param=ABCDE&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}"}
+    specify { expect(subject.plaintext).to eq("POST&/api/orders&api_key=123&test_param=ABCDE&{\"orders\":{\"name\":\"Flip flops\",\"cost\":\"10.00\",\"shipping_cost\":\"2.00\"}}")}
   end
 
   describe "#encrypted" do
-    specify { subject.encrypted.should == OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext)}
+    specify { expect(subject.encrypted).to eq(OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext))}
   end
 
   describe "#to_s" do
-    specify { subject.to_s.should == subject.encrypted}
+    specify { expect(subject.to_s).to eq(subject.encrypted)}
   end
 
   describe "#==" do
     let(:duplicate_signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: method, path: path, params: params, body: request_body) }
-    specify { (subject == OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext)).should be_true }
-    specify { (subject == OpenSSL::HMAC::hexdigest("sha256", "BADSECRET", subject.plaintext)).should be_false }
-    specify { (subject == duplicate_signature).should be_true }
+    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", api_secret, subject.plaintext)).to be_true }
+    specify { expect(subject == OpenSSL::HMAC::hexdigest("sha256", "BADSECRET", subject.plaintext)).to be_false }
+    specify { expect(subject == duplicate_signature).to be_true }
   end
 end

@@ -39,20 +39,20 @@ describe ShippingEasy::Authenticator, api: true do
   end
 
   describe "#request_expired?" do
-    specify { subject.request_expired?.should be_false }
+    specify { expect(subject.request_expired?).to be_false }
 
     context "when expired" do
       let(:api_timestamp) { (Time.now - (ShippingEasy::Authenticator::EXPIRATION_INTERVAL * 2)).to_i }
-      specify { subject.request_expired?.should be_true }
+      specify { expect(subject.request_expired?).to be_true }
     end
   end
 
   describe "#signatures_match?" do
-    specify { subject.signatures_match?.should be_true }
+    specify { expect(subject.signatures_match?).to be_true }
 
     context "when they don't match" do
       let(:api_signature) { "XXX" }
-      specify { subject.signatures_match?.should be_false }
+      specify { expect(subject.signatures_match?).to be_false }
     end
   end
 
@@ -70,7 +70,7 @@ describe ShippingEasy::Authenticator, api: true do
         subject.stub(:request_expired?).and_return(false)
         subject.stub(:signatures_match?).and_return(true)
       end
-      specify { subject.authenticate.should be_true }
+      specify { expect(subject.authenticate).to be_true }
     end
 
     context "when request has expired" do
