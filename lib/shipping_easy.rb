@@ -52,6 +52,12 @@ module ShippingEasy
     end
   end
 
+  class SessionExpiredError < Error
+    def initialize(msg = "The client session has expired.")
+      super(msg)
+    end
+  end
+
   class AccessDeniedError < Error
     def initialize(msg = "Access denied.")
       super(msg)
