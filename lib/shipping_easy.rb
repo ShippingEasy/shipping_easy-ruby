@@ -15,6 +15,7 @@ require "shipping_easy/resources/base"
 require "shipping_easy/resources/account"
 require "shipping_easy/resources/order"
 require "shipping_easy/resources/cancellation"
+require "shipping_easy/resources/subscription_plan"
 require "shipping_easy/version"
 
 module ShippingEasy
