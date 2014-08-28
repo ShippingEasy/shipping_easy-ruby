@@ -429,6 +429,8 @@ You must include an API timestamp in your requests. The timestamp should be a Un
 
 ### Example curl request
 
+#### Creating an order
+
 ````shell
 curl -H "Content-Type: application/json" --data @body.json "https://app.shippingeasy.com/api/stores/27aa472e16faa83dd13b7758d31974ed/orders?api_key=f9a7c8ebdfd34beaf260d9b0296c7059&api_timestamp=1401803554&api_signature=c65f43beed46e581939898a78acd10064cfa146845e97885ec02124d7ad648e4"
 ````
@@ -436,6 +438,18 @@ curl -H "Content-Type: application/json" --data @body.json "https://app.shipping
 An example body.json can be found here:
 
 https://gist.github.com/twmills/3f4636b835c611ab3f7f
+
+#### Cancelling an order
+
+````shell
+curl -X POST "https://app.shippingeasy.com/api/stores/86eac265e87ea9a74a86fe248f2e79d2/orders/ABC123/cancellations?api_key=XXX&api_signature=c24c5118a2b2af27557af721145991594d00a0d914f0d9bc2b9a2fa26efb30cc&api_timestamp=1409173624"
+````
+
+#### Searching orders
+
+````shell
+curl "https://app.shippingeasy.com/api/orders?api_key=XXX&api_signature=a6ab10918d435ad2abfbbe6004dc2fc7faac62a291f4d66e4a36e5a654d15a54&api_timestamp=1409174329&page=3&per_page=10&status%5B%5D=ready_for_shipment&status%5B%5D=shipped"
+````
 
 
 ## Contributing
