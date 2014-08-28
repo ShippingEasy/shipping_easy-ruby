@@ -414,7 +414,7 @@ First you will need to create an API signature. Concatenate these into a plainte
 1. Capitilized method of the request. E.g. "POST"
 2. The URI path
 3. The query parameters sorted alphabetically and concatenated together into a URL friendly format: param1=ABC&param2=XYZ
-4. The request body as a string if one exists
+4. The request body as a string if one exists. Escape all double quotes with backslashes.
 
 All parts are then concatenated together with an ampersand. The result resembles something like this:
 
@@ -427,7 +427,7 @@ Finally, using your API secret encrypt the string using HMAC sha256. In ruby, it
 ### API timestamp
 You must include an API timestamp in your requests. The timestamp should be a Unix epoch timestamp (integer) of the current time.
 
-### Example curl request
+### Example curl requests
 
 #### Creating an order
 
