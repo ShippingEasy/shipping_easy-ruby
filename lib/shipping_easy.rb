@@ -8,10 +8,12 @@ require "shipping_easy/signature"
 require "shipping_easy/http"
 require "shipping_easy/http/faraday_adapter"
 require "shipping_easy/http/request"
+require "shipping_easy/http/partner_request"
 require "shipping_easy/http/response_handler"
 require "shipping_easy/resources"
 require "shipping_easy/resources/base"
 require "shipping_easy/resources/order"
+require "shipping_easy/resources/rate_quote"
 require "shipping_easy/resources/cancellation"
 require "shipping_easy/version"
 
@@ -35,6 +37,16 @@ module ShippingEasy
     def api_key
       return nil if configuration.nil?
       configuration.api_key
+    end
+
+    def partner_api_secret
+      return nil if configuration.nil?
+      configuration.partner_api_secret
+    end
+
+    def partner_api_key
+      return nil if configuration.nil?
+      configuration.partner_api_key
     end
 
     def base_url
