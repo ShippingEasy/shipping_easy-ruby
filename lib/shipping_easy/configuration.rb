@@ -16,6 +16,8 @@ module ShippingEasy
 
     attr_accessor :api_key,
                   :api_secret,
+                  :partner_api_key,
+                  :partner_api_secret,
                   :api_version,
                   :base_url,
                   :http_adapter

@@ -19,7 +19,7 @@ describe ShippingEasy::Resources::Base do
                                                               :http_method=>:get,
                                                               :params => {:page => 2,
                                                                           :per_page => 3,
-                                                                          :status => [:shipped]}})
+                                                                          :status => [:shipped]}}, :public)
 
       GenericResource.find_all(:page => 2, :per_page => 3, :status => [:shipped] )
     end
@@ -29,7 +29,7 @@ describe ShippingEasy::Resources::Base do
         GenericResource.command(:create, http_method: :post) do |args|
           "/this/is/the/path"
         end
-        GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/path", :http_method=>:post})
+        GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/path", :http_method=>:post}, :public)
         GenericResource.create
       end
 
@@ -38,7 +38,7 @@ describe ShippingEasy::Resources::Base do
           GenericResource.command(:create, http_method: :post) do |args|
             "/this/is/the/#{args.delete(:name)}"
           end
-          GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/ABC123", :http_method=>:post})
+          GenericResource.should_receive(:execute_request!).with({:relative_path=>"/this/is/the/ABC123", :http_method=>:post}, :public)
           GenericResource.create(name: "ABC123")
         end
       end
