@@ -1,3 +1,6 @@
+v0.4.0
+- Add support for Rate Quoting API; adds support for Partner-level Requests
+
 v0.3.2
 - Add session expired error.
 
