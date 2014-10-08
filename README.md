@@ -395,6 +395,95 @@ If successful the call will return a JSON hash with the ShippingEasy order ID, a
 
     { "order" => { "id" => "27654", "external_order_identifier" => "ABC123" } }
 
+### Rate Quote API
+
+ShippingEasy provides an API for our partners to fetch rate quotes from USPS, UPS or FedEx.
+
+Once you've setup your Partner credentials with a ShippingEasy account manager and have been issued an API key/secret, configure the client with your API credentials in the following block, which should be setup in an initializer:
+
+    ShippingEasy.configure do |config|
+      config.partner_api_key = REPLACE_WITH_API_KEY # Use your provided Partner API Key
+      config.partner_api_secret = REPLACE_WITH_API_SECRET # Use your provided Partner API Secret
+      config.base_url = "https://app.shippingeasy.com"
+    end
+
+#### Rate Quote API Attributes
+
+The following is a list of attributes that should be provided to the `ShippingEasy::Resources::RateQuote` object as an associative array, using the `fetch` method.
+
+Some example hashes of rate quote request data for each carrier can be found at  https://gist.github.com/nkrupa/3a76e592377f12bd96be
+
+**carrier**
+: *Required.* Must be one of the following (case-sensitive): `['usps', 'ups', 'fedex']`.
+
+**carrier_service**
+: *Required.* Must match the carrier-specific service API key (and is case-sensitive). For example, for USPS First Class International, use `FirstClassMailInternational`.  See the carrier's documentation for possible service keys.
+
+**packaging**
+: *Required.* Use `custom` for customer-provided, otherwise specify the carrier-specific packaging key. For example, for USPS Small Flat Rate Box, use `SmallFlatRateBox`.  
+
+**packaging_dimensions**
+: Valid only for customer-provided packaging. Must be a hash with all three keys of `:length, :width, :height`.
+
+**from_address_1**
+: *Required for UPS and FedEx* 
+
+**from_address_2**
+
+**from_city**
+: *Required for UPS and FedEx* 
+
+**from_state**
+: *Required for UPS and FedEx* 
+
+**from_postal_code**
+: *Required for all carriers*
+
+**from_phone_number**
+: *Required for FedEx* 
+
+**to_residential**
+: boolean (defaults to false) represented if destination address is residential. Used by UPS and FedEx.
+
+**to_postal_code**
+: *Required for USPS domestic rates, and for UPS and FedEx*
+
+**to_address_1**
+: *Required for UPS and FedEx* 
+
+**to_address_2**
+
+**to_city**
+: *Required for UPS and FedEx* 
+
+**to_state**
+: *Required for UPS and FedEx* 
+
+**to_country_code**
+: *Required for all international quotes* Defaults to 'US', must be a two-digit ISO-3166 country code.
+
+**to_phone_number**
+: *Required for FedEx* 
+
+**weight**
+: *Required for most carrier services* - represented in ounces.
+
+**confirmation_option**
+: Available options (not all available for all carriers/services): `["delivery_confirmation", "signature_required", "adult_signature_required", "verbal_confirmation", "DIRECT", "INDIRECT", "ADULT", "included_signature_confirmation", "restricted_delivery", "signature_confirmation", "adult_signature", "delivery_confirmation", "am_delivery"]`
+
+**requires_additional_handling**
+: Available for UPS only
+
+**saturday_pickup**
+: Available for UPS/FedEx only. Cannot be combined with saturday_delivery
+
+**saturday_delivery**
+: Available for UPS/FedEx only. Cannot be combined with saturday_pickup
+
+**ship_date**
+: *Required for FedEx*
+
+
 #### Possible Exceptions
 
 ##### ShippingEasy::AccessDeniedError
