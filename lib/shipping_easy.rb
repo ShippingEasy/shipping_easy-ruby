@@ -2,6 +2,7 @@
 require "faraday"
 require "rack"
 require "json"
+require "openssl"
 require "shipping_easy/authenticator"
 require "shipping_easy/configuration"
 require "shipping_easy/signature"
