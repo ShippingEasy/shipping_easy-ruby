@@ -15,6 +15,7 @@ require "shipping_easy/resources"
 require "shipping_easy/resources/base"
 require "shipping_easy/resources/order"
 require "shipping_easy/resources/rate_quote"
+require "shipping_easy/resources/session"
 require "shipping_easy/resources/cancellation"
 require "shipping_easy/version"
 
