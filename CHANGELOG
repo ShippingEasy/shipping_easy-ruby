@@ -1,3 +1,6 @@
+v0.5.0
+- Add support for Partner Session API; require openssl.
+
 v0.4.0
 - Add support for Rate Quoting API; adds support for Partner-level Requests
 
