@@ -8,15 +8,35 @@ describe ShippingEasy::Signature do
   let(:request_body) { { orders: { name: "Flip flops", cost: "10.00", shipping_cost: "2.00" } }.to_json.to_s }
   let(:method) { :post }
 
-  subject { ShippingEasy::Signature.new(api_secret: api_secret, method: method, path: path, params: params, body: request_body) }
+  let(:options) { {api_secret: api_secret, method: method, path: path, params: params, body: request_body} }
+  subject { ShippingEasy::Signature.new(options) }
 
   describe "#initialize" do
     specify { subject.api_secret.should == api_secret }
     specify { subject.method.should == "POST" }
     specify { subject.path.should == path }
     specify { subject.body.should == request_body }
-    specify { subject.params.should == params }
     specify { subject.params[:api_signature].should be_nil }
+
+    it "does not modify the input hash" do
+      expect(subject).to_not be_nil
+      expect(options).to have_key(:api_secret)
+      expect(options).to have_key(:method)
+      expect(options).to have_key(:path)
+      expect(options).to have_key(:params)
+    end
+
+    it "does not modify the passed in params hash" do
+      expect(subject).to_not be_nil
+      expect(params).to have_key :test_param
+      expect(params).to have_key :api_key
+      expect(params).to have_key :api_signature
+    end
+
+    it "the exposed params hash does not contain the api_signature" do
+      params_without_signature = params.reject{|k,v| k == :api_signature}
+      expect(subject.params).to eq params_without_signature
+    end
   end
 
   describe "#plaintext" do
