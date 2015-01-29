@@ -19,11 +19,12 @@ module ShippingEasy
     #           :body - The body of the request which should normally be a JSON payload.
     #
     def initialize(options = {})
+      options = options.dup
       @api_secret = options.delete(:api_secret) || ""
       @method = options.fetch(:method, :get).to_s.upcase
       @path = options.delete(:path) || ""
       @body = options.delete(:body) || ""
-      @params = options.delete(:params) || {}
+      @params = options[:params].nil? ? {} : options.delete(:params).dup
       @params.delete(:api_signature) # remove for convenience
     end
 
