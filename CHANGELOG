@@ -1,3 +1,6 @@
+v0.6.0
+- Add ability to find order by external order identifier
+
 v0.5.0
 - Add support for Partner Session API; require openssl.
 
