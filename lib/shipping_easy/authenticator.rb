@@ -4,7 +4,7 @@ module ShippingEasy
   # shared secret. Requests may not be more than 10 minutes old in order to prevent playback attacks.
   class Authenticator
 
-    EXPIRATION_INTERVAL = 10 * 60
+    EXPIRATION_INTERVAL = 60 * 60
 
     attr_reader :api_secret,
                 :api_signature,
