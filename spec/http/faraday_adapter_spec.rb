@@ -51,4 +51,10 @@ describe ShippingEasy::Http::FaradayAdapter do
     expect(response.env[:method]).to eq(:post)
     expect(response.env[:url].to_s).to eq("https://app1.shippingeasy.com/")
   end
+
+  it "adds a custom user agent" do
+    stub_request(:post, "https://app.shippingeasy.com")
+    response = subject.connection.post("https://app.shippingeasy.com")
+    expect(response.env.request_headers["User-Agent"]).to eq("shipping_easy-ruby/#{ShippingEasy::VERSION}")
+  end
 end
