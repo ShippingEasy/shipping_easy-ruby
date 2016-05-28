@@ -1,3 +1,4 @@
+require 'faraday_middleware'
 class ShippingEasy::Http::FaradayAdapter
 
   extend Forwardable
@@ -30,6 +31,7 @@ class ShippingEasy::Http::FaradayAdapter
 
   def connection
     @connection ||= Faraday.new(url: base_url) do |faraday|
+      faraday.use FaradayMiddleware::FollowRedirects, limit: 3, standards_compliant: true
       faraday.adapter Faraday.default_adapter
     end
   end

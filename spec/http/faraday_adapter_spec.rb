@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'webmock/rspec'
 
 describe ShippingEasy::Http::FaradayAdapter do
 
@@ -39,4 +40,15 @@ describe ShippingEasy::Http::FaradayAdapter do
     end
   end
 
+  it "redirects, preserving method" do
+    stub_request(:post, "https://app.shippingeasy.com").to_return(
+      :status => 302,
+      :headers => {  "Location" => "https://app1.shippingeasy.com/" })
+    stub_request(:post, "https://app1.shippingeasy.com/")
+
+    response = subject.connection.post("https://app.shippingeasy.com")
+
+    expect(response.env[:method]).to eq(:post)
+    expect(response.env[:url].to_s).to eq("https://app1.shippingeasy.com/")
+  end
 end
