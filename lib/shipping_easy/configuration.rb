@@ -32,6 +32,7 @@ module ShippingEasy
 
     def base_url=(val)
       if val == LEGACY_URL
+        warn "Legacy URL detected, updating to api.shippingeasy.com"
         @base_url = DEFAULT_URL
       else
         @base_url = val
