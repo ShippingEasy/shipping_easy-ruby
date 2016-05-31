@@ -9,7 +9,8 @@ describe ShippingEasy::Http::Request do
   let(:body) { { order_number: "1234" } }
   let(:api_key) { "12345678ASGHSGHJ" }
   let(:api_secret) { "12345678ASGHSGHJ123213321312" }
-  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: "/api#{relative_path}", params: params.dup, body: body.to_json) }
+  let(:signed_body) { body && body.to_json }
+  let(:signature) { ShippingEasy::Signature.new(api_secret: api_secret, method: http_method, path: "/api#{relative_path}", params: params.dup, body: signed_body) }
 
   before do
     ShippingEasy.configure do |config|
@@ -46,6 +47,25 @@ describe ShippingEasy::Http::Request do
 
   describe "#signature" do
     it "returns a calculated sigature object" do
+      subject.signature.to_s.should == signature.to_s
+    end
+  end
+
+  describe 'body is nil for GET requests with nil body' do
+    let(:http_method) { "get" }
+    let(:body) { nil }
+    specify do
+      subject.body.should == nil
+      subject.signature.to_s.should == signature.to_s
+    end
+  end
+
+  describe 'body is nil for GET requests with omitted payload key' do
+    let(:http_method) { "get" }
+    let(:body) { nil }
+    subject { ShippingEasy::Http::Request.new(http_method: http_method, params: params, relative_path: relative_path) }
+    specify do
+      subject.body.should == nil
       subject.signature.to_s.should == signature.to_s
     end
   end
