@@ -42,7 +42,7 @@ describe ShippingEasy::Http::FaradayAdapter do
 
   it "redirects, preserving method" do
     stub_request(:post, "https://app.shippingeasy.com").to_return(
-      :status => 302,
+      :status => 307,
       :headers => {  "Location" => "https://app1.shippingeasy.com/" })
     stub_request(:post, "https://app1.shippingeasy.com/")
 
