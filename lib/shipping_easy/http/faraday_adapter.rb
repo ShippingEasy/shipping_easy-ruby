@@ -1,3 +1,4 @@
+require 'faraday_middleware'
 class ShippingEasy::Http::FaradayAdapter
 
   extend Forwardable
@@ -30,8 +31,21 @@ class ShippingEasy::Http::FaradayAdapter
 
   def connection
     @connection ||= Faraday.new(url: base_url) do |faraday|
+      faraday.use FaradayMiddleware::FollowRedirects, limit: 3, standards_compliant: true
+      faraday.use CustomUserAgent, "shipping_easy-ruby/#{ShippingEasy::VERSION}"
       faraday.adapter Faraday.default_adapter
     end
   end
+  
+  class CustomUserAgent < Faraday::Middleware
+    def initialize(app, agent_string)
+      super(app)
+      @agent_string = agent_string
+    end
 
+    def call(env)
+      env[:request_headers]['User-Agent'] = @agent_string
+      @app.call(env)
+    end
+  end
 end

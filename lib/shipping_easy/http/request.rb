@@ -5,7 +5,7 @@ class ShippingEasy::Http::Request
   def initialize(options = {})
     @http_method = options.fetch(:http_method, :get)
     @params = options.fetch(:params, {})
-    @body = options.fetch(:payload, {}).to_json
+    @body = options[:payload] && options[:payload].to_json
     @relative_path = options.delete(:relative_path)
   end
 

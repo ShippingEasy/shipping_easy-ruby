@@ -20,12 +20,17 @@ describe ShippingEasy::Configuration do
 
   describe "base_url" do
     it "gets set to a default" do
-      subject.base_url.should == "https://app.shippingeasy.com"
+      subject.base_url.should == "https://api.shippingeasy.com"
     end
 
     it "can be overidden" do
       subject.base_url = String
       subject.base_url.should == String
+    end
+
+    it "ignores if set to the legacy URL" do
+      subject.base_url = "https://app.shippingeasy.com"
+      subject.base_url.should == "https://api.shippingeasy.com"
     end
   end
 end
