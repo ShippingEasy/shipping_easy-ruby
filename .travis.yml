@@ -10,5 +10,7 @@ matrix:
       gemfile: gemfiles/1.9.3-Gemfile
     - rvm: "2.1.2"
       gemfile: gemfiles/1.9.3-Gemfile
+    - rvm: "2.4.0"
+      gemfile: gemfiles/1.9.3-Gemfile
     - rvm: jruby-19mode
       gemfile: gemfiles/1.9.3-Gemfile
