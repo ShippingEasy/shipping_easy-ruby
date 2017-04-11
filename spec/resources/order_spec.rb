@@ -57,7 +57,7 @@ describe ShippingEasy::Resources::Order do
                                                                               :http_method => :put,
                                                                               payload: {order: {order_status: "awaiting_payment"} } },
                                                                             :public)
-      ShippingEasy::Resources::Order..update_external_order_status(:store_api_key => "123456",
+      ShippingEasy::Resources::Order.update_external_order_status(:store_api_key => "123456",
                                                                    external_order_identifier: "ABCXYZ",
                                                                    payload: {order: {order_status: "awaiting_payment"} })
     end
