@@ -6,7 +6,7 @@ describe ShippingEasy::Resources::Store do
       ShippingEasy::Resources::Store.should_receive(:execute_request!).with({:relative_path=>"/stores",
                                                                              :http_method=>:get},
                                                                             :public)
-      ShippingEasy::Resources::Store.stores_api_info
+      ShippingEasy::Resources::Store.find_all
     end
   end
 end
