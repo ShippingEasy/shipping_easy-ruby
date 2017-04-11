@@ -18,8 +18,4 @@ class ShippingEasy::Resources::Order < ShippingEasy::Resources::Base
       "/orders"
     end
   end
-
-  command :update_external_order_status,  http_method: :put do |args|
-    "/stores/#{args.delete(:store_api_key)}/orders/#{args.delete(:external_order_identifier)}/status"
-  end
 end

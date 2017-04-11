@@ -22,13 +22,6 @@ class ShippingEasy::Http::FaradayAdapter
     end
   end
 
-  def put
-    connection.put do |req|
-      req.url uri, params
-      req.body = request.body
-    end
-  end
-
   def get
     connection.get do |req|
       req.url uri, params
