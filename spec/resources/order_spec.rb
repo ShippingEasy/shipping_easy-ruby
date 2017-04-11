@@ -50,4 +50,16 @@ describe ShippingEasy::Resources::Order do
       ShippingEasy::Resources::Order.create(:store_api_key => "123456", payload: { name: "Jack" })
     end
   end
+
+  describe ".update_external_order_status" do
+    it "sends a request with the expected options" do
+      ShippingEasy::Resources::Order.should_receive(:execute_request!).with({ :relative_path => "/stores/123456/orders/ABCXYZ/status",
+                                                                              :http_method => :put,
+                                                                              payload: {order: {order_status: "awaiting_payment"} } },
+                                                                            :public)
+      ShippingEasy::Resources::Order..update_external_order_status(:store_api_key => "123456",
+                                                                   external_order_identifier: "ABCXYZ",
+                                                                   payload: {order: {order_status: "awaiting_payment"} })
+    end
+  end
 end
