@@ -6,7 +6,7 @@ This is the official wrapper for the ShippingEasy API.
 
 Documentation is hosted here:
 
-http://shippingeasy.readme.io/v1.0/docs/ruby-client-getting-started
+http://shippingeasy.readme.io/docs/ruby-client-getting-started
 
 ## Contributing
 
