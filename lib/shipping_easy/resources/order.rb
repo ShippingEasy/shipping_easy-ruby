@@ -18,4 +18,12 @@ class ShippingEasy::Resources::Order < ShippingEasy::Resources::Base
       "/orders"
     end
   end
+
+  command :update_status, http_method: :put do |args|
+    "/stores/#{args.delete(:store_api_key)}/orders/#{args.delete(:id)}/status"
+  end
+
+  command :update_recipient, http_method: :put do |args|
+    "/stores/#{args.delete(:store_api_key)}/orders/#{args.delete(:id)}/recipient"
+  end
 end
