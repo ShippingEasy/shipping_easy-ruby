@@ -19,6 +19,7 @@ class ShippingEasy::Http::FaradayAdapter
     connection.post do |req|
       req.url uri, params
       req.body = request.body
+      req.headers['Content-Type'] = 'application/json' if request.body
     end
   end
 
@@ -36,7 +37,7 @@ class ShippingEasy::Http::FaradayAdapter
       faraday.adapter Faraday.default_adapter
     end
   end
-  
+
   class CustomUserAgent < Faraday::Middleware
     def initialize(app, agent_string)
       super(app)
