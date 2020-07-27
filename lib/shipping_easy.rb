@@ -18,6 +18,7 @@ require "shipping_easy/resources/rate_quote"
 require "shipping_easy/resources/session"
 require "shipping_easy/resources/cancellation"
 require "shipping_easy/version"
+require "shipping_easy/resources/store"
 
 module ShippingEasy
 
